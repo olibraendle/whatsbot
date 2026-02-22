@@ -32,4 +32,4 @@ def send_message(page, text):
 
 
 def get_last_message(page):
-    pass
+    return page.locator('[data-testid="selectable-text"]').last.inner_text()

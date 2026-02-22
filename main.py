@@ -1,9 +1,15 @@
 ## entry point - starts polling loop
 
-from whatsapp import start_browser, send_message
-
+from whatsapp import start_browser, send_message, get_last_message
+import time
 
 page = start_browser()
-send_message(page, "hello from the bot")
+last_seen = get_last_message(page)
 
-print("Whatsapp is ready")
+while True:
+    time.sleep(3)
+    current = get_last_message(page)
+    if current != last_seen:
+        print(f"New message: {current}")
+        last_seen = current
+        send_message(page, current)
