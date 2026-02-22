@@ -1,6 +1,7 @@
 ## entry point - starts polling loop
 
 from whatsapp import start_browser, send_message, get_last_message
+from ai import get_reply
 import time
 
 page = start_browser()
@@ -12,4 +13,8 @@ while True:
     if current != last_seen:
         print(f"New message: {current}")
         last_seen = current
-        send_message(page, current)
+        reply = get_reply(current)
+        send_message(page, reply)
+        last_seen = reply
+
+
